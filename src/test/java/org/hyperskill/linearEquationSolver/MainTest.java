@@ -2,6 +2,8 @@ package org.hyperskill.linearEquationSolver;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class MainTest {
@@ -19,6 +21,22 @@ public class MainTest {
         double actual = Main.solveLinear(0, 17);
         // then
         // throws exception
+    }
+
+    @Test
+    public void shouldSolveTwoSimultaneousLinearsWork1() {
+        String expected = "0,85714 0,71429";
+        double[] actualResult = Main.solveTwoSimultaneousLinears(4, 5 , 7, 3, 9, 9);
+        String actual = String.format("%.5f %.5f", actualResult[0], actualResult[1]);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSolveTwoSimultaneousLinearsWork2() {
+        String expected = "-1,0 2,0";
+        double[] actualResult = Main.solveTwoSimultaneousLinears(1, 2, 3, 4, 5, 6);
+        String actual = String.format("%.5f %.5f", actualResult[0], actualResult[1]);
+        assertEquals(expected, actual);
     }
 
 }
