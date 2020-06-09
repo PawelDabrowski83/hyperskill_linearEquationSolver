@@ -20,4 +20,27 @@ public class MathUtils {
         }
         return num2;
     }
+
+    public static Fraction addFractions(Fraction fraction1, Fraction fraction2) {
+        if (fraction1.denominator == fraction2.denominator) {
+            return new Fraction(fraction1.numerator + fraction2.numerator,
+                    fraction1.denominator).shape();
+        }
+        if (fraction1.denominator % fraction2.denominator == 0 || fraction2.denominator % fraction1.denominator == 0) {
+            int divider;
+            if (fraction1.denominator > fraction2.denominator) {
+                divider = fraction1.denominator / fraction2.denominator;
+                return new Fraction(fraction1.numerator + fraction2.numerator * divider,
+                        fraction1.denominator).shape();
+            } else {
+                divider = fraction2.denominator / fraction1.denominator;
+                return new Fraction(fraction2.numerator + fraction1.numerator * divider,
+                        fraction2.denominator).shape();
+            }
+        } else {
+            return new Fraction(
+                    fraction1.numerator * fraction2.denominator + fraction2.numerator * fraction1.denominator,
+                    fraction1.denominator * fraction2.denominator).shape();
+        }
+    }
 }
