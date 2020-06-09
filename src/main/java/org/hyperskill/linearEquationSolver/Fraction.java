@@ -53,6 +53,6 @@ public class Fraction {
     }
 
     public Fraction shape() {
-        return this.pushUpMinus().reduce();
+        return this.reduceZeroNumerator().pushUpMinus().reduce();
     }
 }
