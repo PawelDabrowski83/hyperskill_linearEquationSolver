@@ -34,18 +34,25 @@ public class Fraction {
     }
 
     public Fraction reduce() {
-        int a = this.numerator;
-        int b = this.denominator;
-        int gcd = MathUtils.findGCD(a, b);
-        return new Fraction (a / gcd, b / gcd);
+        int gcd = MathUtils.findGCD(numerator, denominator);
+        return new Fraction (numerator / gcd, denominator / gcd);
     }
 
     public Fraction pushUpMinus() {
-        int a = this.numerator;
-        int b = this.denominator;
-        if (b >= 0) {
-            return new Fraction(a, b);
+        if (denominator >= 0) {
+            return new Fraction(numerator, denominator);
         }
-        return new Fraction(a * -1, b * -1);
+        return new Fraction(numerator * -1, denominator * -1);
+    }
+
+    public Fraction reduceZeroNumerator() {
+        if (numerator == 0 || denominator == 0) {
+            return new Fraction(0, 1);
+        }
+        return this;
+    }
+
+    public Fraction shape() {
+        return this.reduceZeroNumerator().pushUpMinus().reduce();
     }
 }

@@ -135,4 +135,69 @@ public class FractionTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldReduceZeroNumeratorGiven0_0Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, 0);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = fraction.reduceZeroNumerator();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReduceZeroNumeratorGiven0_10Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, 10);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = fraction.reduceZeroNumerator();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReduceZeroNumeratorGiven0_8Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, 8);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = fraction.reduceZeroNumerator();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReduceZeroNumeratorGivenNeg8_0Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(-8, 0);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = fraction.reduceZeroNumerator();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReduceZeroNumeratorGiven0_Neg8Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, -8);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = fraction.reduceZeroNumerator();
+
+        // then
+        assertEquals(expected, actual);
+    }
 }
