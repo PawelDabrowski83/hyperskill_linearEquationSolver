@@ -32,4 +32,11 @@ public class Fraction {
     public String toString() {
         return "Fraction{" + numerator + "/" + denominator + "}";
     }
+
+    public Fraction reduce() {
+        int a = this.numerator;
+        int b = this.denominator;
+        int gcd = MathUtils.findGCD(a, b);
+        return new Fraction (a / gcd, b / gcd);
+    }
 }
