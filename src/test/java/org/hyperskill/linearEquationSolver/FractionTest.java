@@ -83,4 +83,56 @@ public class FractionTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldPushUpMinusGivenNeg1_2ReturnsNeg1_2() {
+        // given
+        Fraction fraction = new Fraction(-1, 2);
+        Fraction expected = new Fraction(-1, 2);
+
+        // when
+        Fraction actual = fraction.pushUpMinus();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPushUpMinusGiven1_Neg2ReturnsNeg1_2() {
+        // given
+        Fraction fraction = new Fraction(1, -2);
+        Fraction expected = new Fraction(-1, 2);
+
+        // when
+        Fraction actual = fraction.pushUpMinus();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPushUpMinusGivenNeg1_Neg2Returns1_2() {
+        // given
+        Fraction fraction = new Fraction(-1, -2);
+        Fraction expected = new Fraction(1, 2);
+
+        // when
+        Fraction actual = fraction.pushUpMinus();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPushUpMinusGiven0_Neg2Returns0_2() {
+        // given
+        Fraction fraction = new Fraction(0, -2);
+        Fraction expected = new Fraction(0, 2);
+
+        // when
+        Fraction actual = fraction.pushUpMinus();
+
+        // then
+        assertEquals(expected, actual);
+    }
 }
