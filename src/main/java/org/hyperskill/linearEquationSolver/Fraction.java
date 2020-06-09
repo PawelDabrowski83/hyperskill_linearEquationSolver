@@ -39,4 +39,13 @@ public class Fraction {
         int gcd = MathUtils.findGCD(a, b);
         return new Fraction (a / gcd, b / gcd);
     }
+
+    public Fraction pushUpMinus() {
+        int a = this.numerator;
+        int b = this.denominator;
+        if (b >= 0) {
+            return new Fraction(a, b);
+        }
+        return new Fraction(a * -1, b * -1);
+    }
 }
