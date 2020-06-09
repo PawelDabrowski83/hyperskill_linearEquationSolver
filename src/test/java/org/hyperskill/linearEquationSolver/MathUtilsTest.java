@@ -35,11 +35,11 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void shouldFindGCDGiven4And2Return2() {
+    public void shouldFindGCDGiven14And7Return7() {
         // given
-        int a = 4;
-        int b = 2;
-        int expected = 2;
+        int a = 14;
+        int b = 7;
+        int expected = 7;
 
         // when
         int actual = MathUtils.findGCD(a, b);
@@ -81,7 +81,7 @@ public class MathUtilsTest {
         // given
         int a = 0;
         int b = -2;
-        int expected = 0;
+        int expected = 1;
 
         // when
         int actual = MathUtils.findGCD(a, b);
