@@ -55,4 +55,5 @@ public class Equation {
                 .peek(v -> i.incrementAndGet())
                 .anyMatch(n -> n.equals(findLeadingEntry())) ? i.get() - 1 : -1;
     }
+
 }

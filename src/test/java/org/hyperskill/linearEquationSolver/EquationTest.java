@@ -249,4 +249,99 @@ public class EquationTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldIsLeadingOneGiven1_1And2_3AndNeg5_2And1_1ReturnsTrue() {
+        // given
+        Equation equation = new Equation(new Fraction[]{
+                Fraction.ONE, new Fraction(2, 3), new Fraction(-5, 2), Fraction.ONE});
+        boolean expected = true;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIsLeadingOneGiven0_1And2_3AndNeg5_2And1_1ReturnsFalse() {
+        // given
+        Equation equation = new Equation(new Fraction[]{
+                Fraction.ZERO, new Fraction(2, 3), new Fraction(-5, 2), Fraction.ONE});
+        boolean expected = false;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIsLeadingOneGiven0_1And0_1AndNeg5_2And1_1ReturnsFalse() {
+        // given
+        Equation equation = new Equation(new Fraction[]{
+                Fraction.ZERO, Fraction.ZERO, new Fraction(-5, 2), Fraction.ONE});
+        boolean expected = false;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIsLeadingOneGiven0_1And0_1And0_1And1_1ReturnsTrue() {
+        // given
+        Equation equation = new Equation(new Fraction[]{
+                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE});
+        boolean expected = true;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIsLeadingOneGiven0_1And0_1And0_1And0_1ReturnsFalse() {
+        // given
+        Equation equation = new Equation(new Fraction[]{
+                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO});
+        boolean expected = false;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIsLeadingOneGivenEmptyReturnsFalse() {
+        // given
+        Equation equation = new Equation(new Fraction[0]);
+        boolean expected = false;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldIsLeadingOneGivenNullThrowsNPE() {
+        // given
+        Equation equation = new Equation(null);
+        boolean expected = false;
+
+        // when
+        boolean actual = equation.isLeadingOne();
+
+        // then
+        assertEquals(expected, actual);
+    }
 }
