@@ -201,4 +201,102 @@ public class FractionUtilsTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldMultiplyFractionsGiven3_5Times1_1Returns3_5() {
+        // given
+        Fraction fraction = new Fraction(3, 5);
+        Fraction multiplier = new Fraction(1, 1);
+        Fraction expected = new Fraction(3, 5);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGiven3_5Times0_1Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(3, 5);
+        Fraction multiplier = new Fraction(0, 1);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGiven0_1Times0_1Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, 1);
+        Fraction multiplier = new Fraction(0, 1);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5Times0_1Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(0, 1);
+        Fraction expected = new Fraction(0, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5Times2_3ReturnsNeg8_15() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(2, 3);
+        Fraction expected = new Fraction(-8, 15);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5Times5_1ReturnsNeg4_1() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(5, 1);
+        Fraction expected = new Fraction(4, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5TimesNeg10_1Returns8_1() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(-10, 1);
+        Fraction expected = new Fraction(8, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
 }
