@@ -277,7 +277,7 @@ public class FractionUtilsTest {
         // given
         Fraction fraction = new Fraction(-4, 5);
         Fraction multiplier = new Fraction(5, 1);
-        Fraction expected = new Fraction(4, 1);
+        Fraction expected = new Fraction(-4, 1);
 
         // when
         Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
