@@ -50,4 +50,11 @@ public class FractionUtils {
                 fraction.denominator * multiplier.denominator)
                 .shape();
     }
+
+    public static Fraction findOpposite(Fraction fraction) {
+        if (Fraction.ZERO.equals(fraction)) {
+            return Fraction.ZERO;
+        }
+        return new Fraction(fraction.denominator, fraction.numerator).shape();
+    }
 }

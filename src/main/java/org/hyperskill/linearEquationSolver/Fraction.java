@@ -49,7 +49,7 @@ public class Fraction {
 
     public Fraction reduceZeroNumerator() {
         if (numerator == 0 || denominator == 0) {
-            return new Fraction(0, 1);
+            return Fraction.ZERO;
         }
         return this;
     }
