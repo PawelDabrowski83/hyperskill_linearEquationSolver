@@ -2,6 +2,8 @@ package org.hyperskill.linearEquationSolver;
 
 
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class Equation {
     Fraction[] numbers;
@@ -39,5 +41,19 @@ public class Equation {
 
     public boolean isEmpty() {
         return Arrays.asList(new Fraction[]{Fraction.ZERO}).containsAll(Arrays.asList(this.numbers));
+    }
+
+    public Fraction findLeadingEntry() {
+        return Arrays.stream(this.numbers)
+                .filter(n -> !n.equals(Fraction.ZERO))
+                .findFirst()
+                .orElseGet(() -> Fraction.ZERO);
+    }
+
+    public int findLeadingPosition() {
+        AtomicInteger i = new AtomicInteger();
+        return Arrays.stream(this.numbers)
+                .peek(v -> i.incrementAndGet())
+                .anyMatch(n -> n.equals(findLeadingEntry())) ? i.get() - 1 : -1;
     }
 }
