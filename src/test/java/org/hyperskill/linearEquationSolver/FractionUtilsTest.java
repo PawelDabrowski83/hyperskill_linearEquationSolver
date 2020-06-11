@@ -201,4 +201,195 @@ public class FractionUtilsTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldMultiplyFractionsGiven3_5Times1_1Returns3_5() {
+        // given
+        Fraction fraction = new Fraction(3, 5);
+        Fraction multiplier = new Fraction(1, 1);
+        Fraction expected = new Fraction(3, 5);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGiven3_5Times0_1Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(3, 5);
+        Fraction multiplier = Fraction.ZERO;
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGiven0_1Times0_1Returns0_1() {
+        // given
+        Fraction fraction = Fraction.ZERO;
+        Fraction multiplier = Fraction.ZERO;
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5Times0_1Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = Fraction.ZERO;
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5Times2_3ReturnsNeg8_15() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(2, 3);
+        Fraction expected = new Fraction(-8, 15);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5Times5_1ReturnsNeg4_1() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(5, 1);
+        Fraction expected = new Fraction(-4, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyFractionsGivenNeg4_5TimesNeg10_1Returns8_1() {
+        // given
+        Fraction fraction = new Fraction(-4, 5);
+        Fraction multiplier = new Fraction(-10, 1);
+        Fraction expected = new Fraction(8, 1);
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldMultiplyFractionsGivenNullTimesNeg10_1ThrowsNPE() {
+        // given
+        Fraction fraction = null;
+        Fraction multiplier = new Fraction(-10, 1);
+        Fraction expected = null;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldMultiplyFractionsGiven1_1TimesNullThrowsNPE() {
+        // given
+        Fraction fraction = new Fraction(1, 1);
+        Fraction multiplier = null;
+        Fraction expected = null;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGiven1_2Returns2_1() {
+        // given
+        Fraction fraction = new Fraction(1, 2);
+        Fraction expected = new Fraction(2, 1);
+
+        // when
+        Fraction actual = FractionUtils.findOpposite(fraction);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGivenNeg7_4ReturnsNeg4_7() {
+        // given
+        Fraction fraction = new Fraction(-7, 4);
+        Fraction expected = new Fraction(-4, 7);
+
+        // when
+        Fraction actual = FractionUtils.findOpposite(fraction);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGiven0_1Returns0_1() {
+        // given
+        Fraction fraction = Fraction.ZERO;
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = FractionUtils.findOpposite(fraction);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGiven0_12Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, 12);
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = FractionUtils.findOpposite(fraction);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldFindOppositeGivenNullThrowsNPE() {
+        // given
+        Fraction fraction = null;
+        Fraction expected = null;
+
+        // when
+        Fraction actual = FractionUtils.findOpposite(fraction);
+
+        // then
+        assertEquals(expected, actual);
+    }
 }

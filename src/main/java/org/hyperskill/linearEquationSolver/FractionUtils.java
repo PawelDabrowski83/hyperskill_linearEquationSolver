@@ -43,4 +43,18 @@ public class FractionUtils {
                     fraction1.denominator * fraction2.denominator).shape();
         }
     }
+
+    public static Fraction multiplyFractions(Fraction fraction, Fraction multiplier) {
+        return new Fraction(
+                fraction.numerator * multiplier.numerator,
+                fraction.denominator * multiplier.denominator)
+                .shape();
+    }
+
+    public static Fraction findOpposite(Fraction fraction) {
+        if (Fraction.ZERO.equals(fraction)) {
+            return Fraction.ZERO;
+        }
+        return new Fraction(fraction.denominator, fraction.numerator).shape();
+    }
 }
