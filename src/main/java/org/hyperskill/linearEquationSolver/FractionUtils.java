@@ -52,8 +52,8 @@ public class FractionUtils {
     }
 
     public static Fraction findOpposite(Fraction fraction) {
-        if (new Fraction(0, 1).equals(fraction)) {
-            return new Fraction(0, 1);
+        if (Fraction.ZERO.equals(fraction)) {
+            return Fraction.ZERO;
         }
         return new Fraction(fraction.denominator, fraction.numerator).shape();
     }

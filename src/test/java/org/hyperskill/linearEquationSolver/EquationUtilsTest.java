@@ -66,7 +66,7 @@ public class EquationUtilsTest {
     public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times0_1Returns() {
         // given
         Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
-        Fraction multiplier = new Fraction(0, 1);
+        Fraction multiplier = Fraction.ZERO;
         Equation expected = new Equation(new Fraction[]{new Fraction(0, 1), new Fraction(0, 1), new Fraction(0, 1)});
 
         // when
