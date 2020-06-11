@@ -164,7 +164,7 @@ public class FractionUtilsTest {
     public void shouldAddFractionsGiven1_4And0_1Returns1_4() {
         // given
         Fraction fraction1 = new Fraction(1, 4);
-        Fraction fraction2 = new Fraction(0, 1);
+        Fraction fraction2 = Fraction.ZERO;
         Fraction expected = new Fraction(1, 4);
 
         // when
@@ -177,9 +177,9 @@ public class FractionUtilsTest {
     @Test
     public void shouldAddFractionsGiven0_1And0_1Returns0_1() {
         // given
-        Fraction fraction1 = new Fraction(0, 1);
-        Fraction fraction2 = new Fraction(0, 1);
-        Fraction expected = new Fraction(0, 1);
+        Fraction fraction1 = Fraction.ZERO;
+        Fraction fraction2 = Fraction.ZERO;
+        Fraction expected = Fraction.ZERO;
 
         // when
         Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
@@ -191,7 +191,7 @@ public class FractionUtilsTest {
     @Test
     public void shouldAddFractionsGiven0_1AndNeg8_1ReturnsNeg8_1() {
         // given
-        Fraction fraction1 = new Fraction(0, 1);
+        Fraction fraction1 = Fraction.ZERO;
         Fraction fraction2 = new Fraction(-8, 1);
         Fraction expected = new Fraction(-8, 1);
 

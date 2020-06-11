@@ -37,7 +37,7 @@ public class EquationUtilsTest {
     @Test
     public void shouldAddEquationGiven1_7AndNeg3_2AndNeg1_1Plus1_4AndNeg2_1And3_4Returns() {
         // given
-        Equation equation1 = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Equation equation1 = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
         Equation equation2 = new Equation(new Fraction[]{new Fraction(1, 4), new Fraction(-2, 1), new Fraction(3, 4)});
         Equation expected = new Equation(new Fraction[]{new Fraction(11, 28), new Fraction(-7, 2), new Fraction(-1, 4)});
 
@@ -51,9 +51,9 @@ public class EquationUtilsTest {
     @Test
     public void shouldAddEquationGiven1_7AndNeg3_2AndNeg1_1Plus0_1AndNeg2_1And0_1Returns() {
         // given
-        Equation equation1 = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Equation equation1 = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
         Equation equation2 = new Equation(new Fraction[]{Fraction.ZERO, new Fraction(-2, 1), Fraction.ZERO});
-        Equation expected = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-7, 2), new Fraction(-1, 1)});
+        Equation expected = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-7, 2), Fraction.NEG_ONE});
 
         // when
         Equation actual = EquationUtils.addEquation(equation1, equation2);
@@ -65,9 +65,9 @@ public class EquationUtilsTest {
     @Test
     public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times1_1Returns() {
         // given
-        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
-        Fraction multiplier = new Fraction(1, 1);
-        Equation expected = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
+        Fraction multiplier = Fraction.ONE;
+        Equation expected = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
 
         // when
         Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
@@ -79,9 +79,9 @@ public class EquationUtilsTest {
     @Test
     public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times0_1Returns() {
         // given
-        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
-        Fraction multiplier = new Fraction(0, 1);
-        Equation expected = new Equation(new Fraction[]{new Fraction(0, 1), new Fraction(0, 1), new Fraction(0, 1)});
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
+        Fraction multiplier = Fraction.ZERO;
+        Equation expected = new Equation(new Fraction[]{Fraction.ZERO, Fraction.ZERO, Fraction.ZERO});
 
         // when
         Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
@@ -93,9 +93,9 @@ public class EquationUtilsTest {
     @Test
     public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1TimesNeg2_3Returns() {
         // given
-        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
         Fraction multiplier = new Fraction(-2, 3);
-        Equation expected = new Equation(new Fraction[]{new Fraction(-2, 21), new Fraction(1, 1), new Fraction(-2, 3)});
+        Equation expected = new Equation(new Fraction[]{new Fraction(-2, 21), Fraction.ONE, new Fraction(-2, 3)});
 
         // when
         Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
@@ -107,7 +107,7 @@ public class EquationUtilsTest {
     @Test
     public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times5_4Returns() {
         // given
-        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
         Fraction multiplier = new Fraction(5, 4);
         Equation expected = new Equation(new Fraction[]{new Fraction(5, 28), new Fraction(-15, 8), new Fraction(-5, 4)});
 
