@@ -53,7 +53,10 @@ public class Equation {
         AtomicInteger i = new AtomicInteger();
         return Arrays.stream(this.numbers)
                 .peek(v -> i.incrementAndGet())
-                .anyMatch(n -> n.equals(findLeadingEntry())) ? i.get() - 1 : -1;
+                .anyMatch(n -> n.equals(findLeadingEntry()) && !n.equals(Fraction.ZERO)) ? i.get() - 1 : -1;
     }
 
+    public boolean isLeadingOne() {
+        return Fraction.ONE.equals(findLeadingEntry());
+    }
 }
