@@ -2,7 +2,7 @@ package org.hyperskill.linearEquationSolver;
 
 public class Fraction {
 
-    public final static Fraction ZERO = new Fraction(0, 1);
+    public static final Fraction ZERO = new Fraction(0, 1);
 
     final int numerator;
     final int denominator;
