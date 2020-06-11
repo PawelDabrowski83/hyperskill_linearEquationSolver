@@ -3,7 +3,6 @@ package org.hyperskill.linearEquationSolver;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
 
 public class Equation {
     Fraction[] numbers;
@@ -47,7 +46,7 @@ public class Equation {
         return Arrays.stream(this.numbers)
                 .filter(n -> !n.equals(Fraction.ZERO))
                 .findFirst()
-                .orElseGet(() -> Fraction.ZERO);
+                .orElse(Fraction.ZERO);
     }
 
     public int findLeadingPosition() {
