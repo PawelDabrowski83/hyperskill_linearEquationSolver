@@ -39,7 +39,7 @@ public class EquationUtilsTest {
         // given
         Equation equation1 = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
         Equation equation2 = new Equation(new Fraction[]{new Fraction(1, 4), new Fraction(-2, 1), new Fraction(3, 4)});
-        Equation expected = new Equation(new Fraction[]{new Fraction(11, 28), new Fraction(-7, 2), new Fraction(1, 4)});
+        Equation expected = new Equation(new Fraction[]{new Fraction(11, 28), new Fraction(-7, 2), new Fraction(-1, 4)});
 
         // when
         Equation actual = EquationUtils.addEquation(equation1, equation2);

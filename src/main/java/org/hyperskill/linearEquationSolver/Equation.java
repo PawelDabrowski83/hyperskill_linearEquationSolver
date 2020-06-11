@@ -32,4 +32,8 @@ public class Equation {
                 "numbers=" + Arrays.toString(numbers) +
                 '}';
     }
+
+    public int getLength() {
+        return numbers.length;
+    }
 }
