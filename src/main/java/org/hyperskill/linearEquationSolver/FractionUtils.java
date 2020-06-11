@@ -43,4 +43,11 @@ public class FractionUtils {
                     fraction1.denominator * fraction2.denominator).shape();
         }
     }
+
+    public static Fraction multiplyFractions(Fraction fraction, Fraction multiplier) {
+        return new Fraction(
+                fraction.numerator * multiplier.numerator,
+                fraction.denominator * multiplier.denominator)
+                .shape();
+    }
 }
