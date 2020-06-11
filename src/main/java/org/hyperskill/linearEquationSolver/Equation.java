@@ -36,4 +36,6 @@ public class Equation {
     public int getLength() {
         return numbers.length;
     }
+
+
 }
