@@ -25,5 +25,6 @@ public class EquationUtils {
 
     public static Equation multiplyEquation(Equation equation, Fraction multiplier) {
 
+        return equation;
     }
 }
