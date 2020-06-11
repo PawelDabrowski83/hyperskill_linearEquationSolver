@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class MathUtilsTest {
+public class FractionUtilsTest {
 
     @Test
     public void shouldFindGCDGiven4And2Return2() {
@@ -14,7 +14,7 @@ public class MathUtilsTest {
         int expected = 2;
 
         // when
-        int actual = MathUtils.findGCD(a, b);
+        int actual = FractionUtils.findGCD(a, b);
 
         // then
         assertEquals(expected, actual);
@@ -28,7 +28,7 @@ public class MathUtilsTest {
         int expected = 1;
 
         // when
-        int actual = MathUtils.findGCD(a, b);
+        int actual = FractionUtils.findGCD(a, b);
 
         // then
         assertEquals(expected, actual);
@@ -42,7 +42,7 @@ public class MathUtilsTest {
         int expected = 7;
 
         // when
-        int actual = MathUtils.findGCD(a, b);
+        int actual = FractionUtils.findGCD(a, b);
 
         // then
         assertEquals(expected, actual);
@@ -56,7 +56,7 @@ public class MathUtilsTest {
         int expected = 2;
 
         // when
-        int actual = MathUtils.findGCD(a, b);
+        int actual = FractionUtils.findGCD(a, b);
 
         // then
         assertEquals(expected, actual);
@@ -70,7 +70,7 @@ public class MathUtilsTest {
         int expected = 2;
 
         // when
-        int actual = MathUtils.findGCD(a, b);
+        int actual = FractionUtils.findGCD(a, b);
 
         // then
         assertEquals(expected, actual);
@@ -84,7 +84,7 @@ public class MathUtilsTest {
         int expected = 1;
 
         // when
-        int actual = MathUtils.findGCD(a, b);
+        int actual = FractionUtils.findGCD(a, b);
 
         // then
         assertEquals(expected, actual);
@@ -98,7 +98,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(3, 4);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -112,7 +112,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(1, 2);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -126,7 +126,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(17, 14);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -140,7 +140,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(17, 8);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -154,7 +154,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(7, 10);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -168,7 +168,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(1, 4);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -182,7 +182,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(0, 1);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
@@ -196,7 +196,7 @@ public class MathUtilsTest {
         Fraction expected = new Fraction(-8, 1);
 
         // when
-        Fraction actual = MathUtils.addFractions(fraction1, fraction2);
+        Fraction actual = FractionUtils.addFractions(fraction1, fraction2);
 
         // then
         assertEquals(expected, actual);
