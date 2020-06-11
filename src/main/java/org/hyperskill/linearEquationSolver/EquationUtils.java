@@ -9,7 +9,7 @@ public class EquationUtils {
     public static Equation addEquation(Equation equation1, Equation equation2) {
         int longest = Math.max(equation1.getLength(), equation2.getLength());
         Equation result = new Equation(new Fraction[longest]);
-        Arrays.fill(result.numbers, new Fraction(0, 1));
+        Arrays.fill(result.numbers, Fraction.ZERO);
         int counter = 0;
         while (counter < longest) {
             if (equation1.getLength() > counter) {
