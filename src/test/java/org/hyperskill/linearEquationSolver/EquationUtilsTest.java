@@ -49,6 +49,20 @@ public class EquationUtilsTest {
     }
 
     @Test
+    public void shouldAddEquationGiven1_7AndNeg3_2AndNeg1_1Plus0_1AndNeg2_1And0_1Returns() {
+        // given
+        Equation equation1 = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Equation equation2 = new Equation(new Fraction[]{Fraction.ZERO, new Fraction(-2, 1), Fraction.ZERO});
+        Equation expected = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-7, 2), new Fraction(-1, 1)});
+
+        // when
+        Equation actual = EquationUtils.addEquation(equation1, equation2);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times1_1Returns() {
         // given
         Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
@@ -96,6 +110,20 @@ public class EquationUtilsTest {
         Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
         Fraction multiplier = new Fraction(5, 4);
         Equation expected = new Equation(new Fraction[]{new Fraction(5, 28), new Fraction(-15, 8), new Fraction(-5, 4)});
+
+        // when
+        Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyEquationGiven1_7AndNeg3_2And0_1Times2_1Returns() {
+        // given
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.ZERO});
+        Fraction multiplier = new Fraction(2, 1);
+        Equation expected = new Equation(new Fraction[]{new Fraction(2, 7), new Fraction(-3, 1), Fraction.ZERO});
 
         // when
         Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
