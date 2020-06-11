@@ -71,4 +71,17 @@ public class EquationTest {
         assertEquals(expected, actual);
     }
 
+    @Test (expected = NullPointerException.class)
+    public void shouldIsEmptyGivenNullReturnsNPE() {
+        // given
+        Equation equation = null;
+        boolean expected = false;
+
+        // when
+        boolean actual = equation.isEmpty();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
 }
