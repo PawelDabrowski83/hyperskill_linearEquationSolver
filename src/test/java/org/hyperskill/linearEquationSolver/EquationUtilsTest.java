@@ -47,4 +47,60 @@ public class EquationUtilsTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times1_1Returns() {
+        // given
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Fraction multiplier = new Fraction(1, 1);
+        Equation expected = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+
+        // when
+        Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times0_1Returns() {
+        // given
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Fraction multiplier = new Fraction(0, 1);
+        Equation expected = new Equation(new Fraction[]{new Fraction(0, 1), new Fraction(0, 1), new Fraction(0, 1)});
+
+        // when
+        Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1TimesNeg2_3Returns() {
+        // given
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Fraction multiplier = new Fraction(-2, 3);
+        Equation expected = new Equation(new Fraction[]{new Fraction(-2, 21), new Fraction(1, 1), new Fraction(-2, 3)});
+
+        // when
+        Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMultiplyEquationGiven1_7AndNeg3_2AndNeg1_1Times5_4Returns() {
+        // given
+        Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), new Fraction(-1, 1)});
+        Fraction multiplier = new Fraction(5, 4);
+        Equation expected = new Equation(new Fraction[]{new Fraction(5, 28), new Fraction(-15, 8), new Fraction(-5, 4)});
+
+        // when
+        Equation actual = EquationUtils.multiplyEquation(equation, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
 }

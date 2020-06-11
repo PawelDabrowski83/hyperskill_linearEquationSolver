@@ -22,4 +22,8 @@ public class EquationUtils {
         }
         return result;
     }
+
+    public static Equation multiplyEquation(Equation equation, Fraction multiplier) {
+
+    }
 }
