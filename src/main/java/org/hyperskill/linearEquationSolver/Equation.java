@@ -36,4 +36,8 @@ public class Equation {
     public int getLength() {
         return numbers.length;
     }
+
+    public boolean isEmpty() {
+        return Arrays.asList(new Fraction[]{Fraction.ZERO}).containsAll(Arrays.asList(this.numbers));
+    }
 }

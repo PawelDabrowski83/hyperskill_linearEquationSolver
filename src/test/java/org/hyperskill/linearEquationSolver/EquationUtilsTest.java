@@ -96,7 +96,7 @@ public class EquationUtilsTest {
         // given
         Equation equation = new Equation(new Fraction[]{new Fraction(1, 7), new Fraction(-3, 2), Fraction.NEG_ONE});
         Fraction multiplier = new Fraction(-2, 3);
-        Equation expected = new Equation(new Fraction[]{new Fraction(-2, 21), Fraction.ONE, new Fraction(-2, 3)});
+        Equation expected = new Equation(new Fraction[]{new Fraction(-2, 21), Fraction.ONE, new Fraction(2, 3)});
 
         // when
         Equation actual = EquationUtils.multiplyEquation(equation, multiplier);

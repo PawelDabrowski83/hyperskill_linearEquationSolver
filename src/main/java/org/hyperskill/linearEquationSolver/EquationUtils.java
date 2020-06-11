@@ -1,8 +1,12 @@
 package org.hyperskill.linearEquationSolver;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hyperskill.linearEquationSolver.FractionUtils.addFractions;
+import static org.hyperskill.linearEquationSolver.FractionUtils.multiplyFractions;
 
 public class EquationUtils {
 
@@ -24,7 +28,9 @@ public class EquationUtils {
     }
 
     public static Equation multiplyEquation(Equation equation, Fraction multiplier) {
-
-        return equation;
+        return new Equation(
+                Arrays.stream(equation.numbers)
+                        .map(n -> multiplyFractions(n, multiplier))
+                        .toArray(Fraction[]::new));
     }
 }
