@@ -1,6 +1,6 @@
 package org.hyperskill.linearEquationSolver;
 
-public class MathUtils {
+public class FractionUtils {
 
     public static int findGCD(int a, int b) {
         int num1 = Math.abs(a);

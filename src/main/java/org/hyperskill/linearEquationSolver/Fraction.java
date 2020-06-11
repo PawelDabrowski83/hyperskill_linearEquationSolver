@@ -34,7 +34,7 @@ public class Fraction {
     }
 
     public Fraction reduce() {
-        int gcd = MathUtils.findGCD(numerator, denominator);
+        int gcd = FractionUtils.findGCD(numerator, denominator);
         return new Fraction (numerator / gcd, denominator / gcd);
     }
 
