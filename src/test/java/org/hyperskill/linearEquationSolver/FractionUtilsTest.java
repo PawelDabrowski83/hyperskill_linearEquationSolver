@@ -299,4 +299,32 @@ public class FractionUtilsTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldMultiplyFractionsGivenNullTimesNeg10_1ThrowsNPE() {
+        // given
+        Fraction fraction = null;
+        Fraction multiplier = new Fraction(-10, 1);
+        Fraction expected = null;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldMultiplyFractionsGiven1_1TimesNullThrowsNPE() {
+        // given
+        Fraction fraction = new Fraction(1, 1);
+        Fraction multiplier = null;
+        Fraction expected = null;
+
+        // when
+        Fraction actual = FractionUtils.multiplyFractions(fraction, multiplier);
+
+        // then
+        assertEquals(expected, actual);
+    }
 }
