@@ -1,203 +1,82 @@
 package org.hyperskill.linearEquationSolver;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
+@DisplayName("Should Fraction methods work")
 public class FractionTest {
 
-    @Test
-    public void shouldReduceGiven1_2Returns1_2() {
-        // given
-        Fraction fraction = new Fraction(1, 2);
-        Fraction expected = new Fraction(1, 2);
-
-        // when
-        Fraction actual = fraction.reduce();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Fraction reduce() returns lowest equivalent Fraction")
+    @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
+    @ArgumentsSource(ReduceArgumentProvider.class)
+    void reduce(Fraction expected, Fraction actual) {
+        assertEquals(expected, actual.reduce());
     }
 
-    @Test
-    public void shouldReduceGiven2_4Returns1_2() {
-        // given
-        Fraction fraction = new Fraction(2, 4);
-        Fraction expected = new Fraction(1, 2);
+    static class ReduceArgumentProvider implements ArgumentsProvider {
 
-        // when
-        Fraction actual = fraction.reduce();
-
-        // then
-        assertEquals(expected, actual);
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(new Fraction(1, 2), new Fraction(1, 2)),
+                    Arguments.of(new Fraction(1, 2), new Fraction(2, 4)),
+                    Arguments.of(new Fraction(5, 1), new Fraction(100, 20)),
+                    Arguments.of(new Fraction(1, 2), new Fraction(13, 26)),
+                    Arguments.of(new Fraction(3, 4), new Fraction(3, 4)),
+                    Arguments.of(new Fraction(3, 4), new Fraction(6, 8))
+                    );
+        }
     }
 
-    @Test
-    public void shouldReduceGiven100_20Returns5_1() {
-        // given
-        Fraction fraction = new Fraction(100, 20);
-        Fraction expected = new Fraction(5, 1);
-
-        // when
-        Fraction actual = fraction.reduce();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Fraction pushUpMinus() assure that minus is only on upper part")
+    @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
+    @ArgumentsSource(PushUpMinusArgumentProvider.class)
+    void pushUpMinus(Fraction expected, Fraction actual) {
+        assertEquals(expected, actual.pushUpMinus());
     }
 
-    @Test
-    public void shouldReduceGiven13_26Returns1_2() {
-        // given
-        Fraction fraction = new Fraction(13, 26);
-        Fraction expected = new Fraction(1, 2);
+    static class PushUpMinusArgumentProvider implements ArgumentsProvider {
 
-        // when
-        Fraction actual = fraction.reduce();
-
-        // then
-        assertEquals(expected, actual);
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(new Fraction(-1, 2), new Fraction(-1, 2)),
+                    Arguments.of(new Fraction(-1, 2), (new Fraction(1, -2)),
+                    Arguments.of(new Fraction(1, 2), new Fraction(-1, -2)),
+                    Arguments.of(new Fraction(0, 2), new Fraction(0, -2))
+            ));
+        }
     }
 
-    @Test
-    public void shouldReduceGiven3_4Returns3_4() {
-        // given
-        Fraction fraction = new Fraction(3, 4);
-        Fraction expected = new Fraction(3, 4);
 
-        // when
-        Fraction actual = fraction.reduce();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Fraction reduceZeroNumerator() assure that all zero fractions are Fraction.ZERO")
+    @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
+    @ArgumentsSource(ReduceZeroNumeratorArgumentProvider.class)
+    void reduceZeroNumerator(Fraction expected, Fraction actual) {
+        assertEquals(expected, actual.reduceZeroNumerator());
     }
 
-    @Test
-    public void shouldReduceGiven6_8Returns3_4() {
-        // given
-        Fraction fraction = new Fraction(6, 8);
-        Fraction expected = new Fraction(3, 4);
+    static class ReduceZeroNumeratorArgumentProvider implements ArgumentsProvider {
 
-        // when
-        Fraction actual = fraction.reduce();
-
-        // then
-        assertEquals(expected, actual);
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(Fraction.ZERO, new Fraction(0, 0)),
+                    Arguments.of(Fraction.ZERO, new Fraction(0, 10)),
+                    Arguments.of(Fraction.ZERO, new Fraction(0, 8)),
+                    Arguments.of(Fraction.ZERO, new Fraction(0, -8)),
+                    Arguments.of(Fraction.ZERO, new Fraction(-8, 0))
+            );
+        }
     }
 
-    @Test
-    public void shouldPushUpMinusGivenNeg1_2ReturnsNeg1_2() {
-        // given
-        Fraction fraction = new Fraction(-1, 2);
-        Fraction expected = new Fraction(-1, 2);
-
-        // when
-        Fraction actual = fraction.pushUpMinus();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldPushUpMinusGiven1_Neg2ReturnsNeg1_2() {
-        // given
-        Fraction fraction = new Fraction(1, -2);
-        Fraction expected = new Fraction(-1, 2);
-
-        // when
-        Fraction actual = fraction.pushUpMinus();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldPushUpMinusGivenNeg1_Neg2Returns1_2() {
-        // given
-        Fraction fraction = new Fraction(-1, -2);
-        Fraction expected = new Fraction(1, 2);
-
-        // when
-        Fraction actual = fraction.pushUpMinus();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldPushUpMinusGiven0_Neg2Returns0_2() {
-        // given
-        Fraction fraction = new Fraction(0, -2);
-        Fraction expected = new Fraction(0, 2);
-
-        // when
-        Fraction actual = fraction.pushUpMinus();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReduceZeroNumeratorGiven0_0Returns0_1() {
-        // given
-        Fraction fraction = new Fraction(0, 0);
-        Fraction expected = Fraction.ZERO;
-
-        // when
-        Fraction actual = fraction.reduceZeroNumerator();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReduceZeroNumeratorGiven0_10Returns0_1() {
-        // given
-        Fraction fraction = new Fraction(0, 10);
-        Fraction expected = Fraction.ZERO;
-
-        // when
-        Fraction actual = fraction.reduceZeroNumerator();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReduceZeroNumeratorGiven0_8Returns0_1() {
-        // given
-        Fraction fraction = new Fraction(0, 8);
-        Fraction expected = Fraction.ZERO;
-
-        // when
-        Fraction actual = fraction.reduceZeroNumerator();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReduceZeroNumeratorGivenNeg8_0Returns0_1() {
-        // given
-        Fraction fraction = new Fraction(-8, 0);
-        Fraction expected = Fraction.ZERO;
-
-        // when
-        Fraction actual = fraction.reduceZeroNumerator();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReduceZeroNumeratorGiven0_Neg8Returns0_1() {
-        // given
-        Fraction fraction = new Fraction(0, -8);
-        Fraction expected = Fraction.ZERO;
-
-        // when
-        Fraction actual = fraction.reduceZeroNumerator();
-
-        // then
-        assertEquals(expected, actual);
-    }
 }
