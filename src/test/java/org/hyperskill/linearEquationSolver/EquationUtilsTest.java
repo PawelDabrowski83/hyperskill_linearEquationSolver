@@ -146,11 +146,11 @@ public class EquationUtilsTest {
                 new Fraction(2, 3), new Fraction(3, 4), new Fraction(-1, 7), Fraction.ZERO, new Fraction(5, 6)
         });
         expected = new Equation(new Fraction[]{
-                Fraction.ONE, new Fraction(9, 6), new Fraction(-3, 14), Fraction.ZERO, new Fraction(5, 4)
+                Fraction.ONE, new Fraction(9, 8), new Fraction(-3, 14), Fraction.ZERO, new Fraction(5, 4)
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);
@@ -167,7 +167,7 @@ public class EquationUtilsTest {
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);
@@ -184,7 +184,7 @@ public class EquationUtilsTest {
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);
@@ -201,7 +201,7 @@ public class EquationUtilsTest {
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);
@@ -218,7 +218,7 @@ public class EquationUtilsTest {
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);
@@ -235,7 +235,7 @@ public class EquationUtilsTest {
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);
@@ -252,7 +252,7 @@ public class EquationUtilsTest {
         });
 
         // when
-        actual = EquationUtils.makeLeadingOne();
+        actual = EquationUtils.makeLeadingOne(equation);
 
         // then
         assertEquals(expected, actual);

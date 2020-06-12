@@ -200,4 +200,69 @@ public class FractionTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldFindOppositeGiven1_2Returns2_1() {
+        // given
+        Fraction fraction = new Fraction(1, 2);
+        Fraction expected = new Fraction(2, 1);
+
+        // when
+        Fraction actual = fraction.findOpposite();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGivenNeg7_4ReturnsNeg4_7() {
+        // given
+        Fraction fraction = new Fraction(-7, 4);
+        Fraction expected = new Fraction(-4, 7);
+
+        // when
+        Fraction actual = fraction.findOpposite();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGiven0_1Returns0_1() {
+        // given
+        Fraction fraction = Fraction.ZERO;
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = fraction.findOpposite();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOppositeGiven0_12Returns0_1() {
+        // given
+        Fraction fraction = new Fraction(0, 12);
+        Fraction expected = Fraction.ZERO;
+
+        // when
+        Fraction actual = fraction.findOpposite();
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void shouldFindOppositeGivenNullThrowsNPE() {
+        // given
+        Fraction fraction = null;
+        Fraction expected = null;
+
+        // when
+        Fraction actual = fraction.findOpposite();
+
+        // then
+        assertEquals(expected, actual);
+    }
 }

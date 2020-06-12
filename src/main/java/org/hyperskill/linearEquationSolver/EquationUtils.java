@@ -33,4 +33,8 @@ public class EquationUtils {
                         .map(n -> multiplyFractions(n, multiplier))
                         .toArray(Fraction[]::new));
     }
+
+    public static Equation makeLeadingOne(Equation equation) {
+        return multiplyEquation(equation, equation.findLeadingEntry().findOpposite());
+    }
 }
