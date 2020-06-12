@@ -1,347 +1,167 @@
 package org.hyperskill.linearEquationSolver;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
+@DisplayName("Should Equation work")
 public class EquationTest {
 
-    @Test
-    public void shouldIsEmptyGiven1_2And3_4And0_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{new Fraction(1, 2), new Fraction(3, 4), Fraction.ZERO});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isEmpty();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Equation.isEmpty() work")
+    @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
+    @ArgumentsSource(IsEmptyArgumentsProvider.class)
+    void isEmpty(boolean expected, Equation equation) {
+        assertEquals(expected, equation.isEmpty());
     }
 
-    @Test
-    public void shouldIsEmptyGiven0_1And0_1And0_1ReturnsTrue() {
-        // given
-        Equation equation = new Equation(new Fraction[]{Fraction.ZERO, Fraction.ZERO, Fraction.ZERO});
-        boolean expected = true;
-
-        // when
-        boolean actual = equation.isEmpty();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsEmptyGiven1_1And0_1And1_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{Fraction.ONE, Fraction.ZERO, Fraction.ONE});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isEmpty();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsEmptyGivenNeg1_1And0_1AndNeg1_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{Fraction.NEG_ONE, Fraction.ZERO, Fraction.NEG_ONE});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isEmpty();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsEmptyGiven0_1And0_1And1_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{Fraction.ZERO, Fraction.ZERO, Fraction.ONE});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isEmpty();
-
-        // then
-        assertEquals(expected, actual);
+    static class IsEmptyArgumentsProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            new Fraction(1, 2), new Fraction(3, 4), Fraction.ZERO
+                    })),
+                    Arguments.of(true, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.ONE, Fraction.ZERO, Fraction.ONE
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.NEG_ONE, Fraction.ZERO, Fraction.NEG_ONE
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+                    }))
+            );
+        }
     }
 
     @Test (expected = NullPointerException.class)
     public void shouldIsEmptyGivenNullReturnsNPE() {
-        // given
-        Equation equation = null;
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isEmpty();
-
-        // then
-        assertEquals(expected, actual);
+        assertFalse(new Equation(null).isEmpty());
     }
 
-    @Test
-    public void shouldFindLeadingEntryGiven1_1And0_1And4_5AndNeg8_1Returns1_1() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ONE, Fraction.ZERO, new Fraction(4, 5), new Fraction(-8, 1)});
-        Fraction expected = Fraction.ONE;
-
-        // when
-        Fraction actual = equation.findLeadingEntry();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Equation.findLeadingEntry() work")
+    @ParameterizedTest(name = "{index} => expected={0}, equation={1}")
+    @ArgumentsSource(FindLeadingEntryArgumentsProvider.class)
+    void findLeadingEntry(Fraction expected, Equation equation) {
+        assertEquals(expected, equation.findLeadingEntry());
     }
 
-    @Test
-    public void shouldFindLeadingEntryGiven0_1And0_1And4_5AndNeg8_1Returns4_5() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, new Fraction(4, 5), new Fraction(-8, 1)});
-        Fraction expected = new Fraction(4, 5);
-
-        // when
-        Fraction actual = equation.findLeadingEntry();
-
-        // then
-        assertEquals(expected, actual);
+    static class FindLeadingEntryArgumentsProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(Fraction.ONE, new Equation(new Fraction[]{
+                            Fraction.ONE, Fraction.ZERO, new Fraction(4, 5), new Fraction(-8, 1)
+                    })),
+                    Arguments.of(new Fraction(4, 5), new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, new Fraction(4, 5), new Fraction(-8, 1)
+                    })),
+                    Arguments.of(new Fraction(-8, 1), new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, new Fraction(-8, 1)
+                    })),
+                    Arguments.of(Fraction.ZERO, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                    }))
+            );
+        }
     }
 
-    @Test
-    public void shouldFindLeadingEntryGiven0_1And0_1And0_1AndNeg8_1ReturnsNeg8_1() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, new Fraction(-8, 1)});
-        Fraction expected = new Fraction(-8, 1);
-
-        // when
-        Fraction actual = equation.findLeadingEntry();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Equation.findLeadingPosition() return number with non-zero fraction in equation")
+    @ParameterizedTest(name = "{index} => expected={0}, equation={1}")
+    @ArgumentsSource(FindLeadingPositionArgumentsProvider.class)
+    void findLeadingPosition(int expected, Equation equation) {
+        assertEquals(expected, equation.findLeadingPosition());
     }
 
-    @Test
-    public void shouldFindLeadingEntryGiven0_1And0_1And0_1And0_1Returns0_1() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO});
-        Fraction expected = Fraction.ZERO;
-
-        // when
-        Fraction actual = equation.findLeadingEntry();
-
-        // then
-        assertEquals(expected, actual);
+    static class FindLeadingPositionArgumentsProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(0, new Equation(new Fraction[]{
+                            new Fraction(2, 3), Fraction.ONE, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE
+                    })),
+                    Arguments.of(2, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, new Fraction(4, 5), new Fraction(-8, 1)
+                    })),
+                    Arguments.of(3, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, new Fraction(-8, 1)
+                    })),
+                    Arguments.of(-1, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                    })),
+                    Arguments.of(1, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ONE, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE
+                    })),
+                    Arguments.of(3, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE
+                    })),
+                    Arguments.of(4, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.NEG_ONE
+                    })),
+                    Arguments.of(-1, new Equation(new Fraction[0])),
+                    Arguments.of(-1, new Equation(new Fraction[]{Fraction.ZERO})),
+                    Arguments.of(0, new Equation(new Fraction[]{Fraction.NEG_ONE}))
+            );
+        }
     }
 
-    @Test
-    public void shouldFindLeadingPositionGiven2_3And1_1And0_1And9_2AndNeg1_1Returns0() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                new Fraction(2, 3), Fraction.ONE, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE});
-        int expected = 0;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
+    @DisplayName("Should Equation.isLeadingOne() work")
+    @ParameterizedTest(name = "{index} => expected={0}, equation={1}")
+    @ArgumentsSource(IsLeadingOneArgumentsProvider.class)
+    void isLeadingOne(boolean expected, Equation equation) {
+        assertEquals(expected, equation.isLeadingOne());
     }
 
-    @Test
-    public void shouldFindLeadingPositionGiven0_1And1_1And0_1And9_2AndNeg1_1Returns1() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ONE, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE});
-        int expected = 1;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLeadingPositionGiven0_1And0_1And0_1And9_2AndNeg1_1Returns3() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE});
-        int expected = 3;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLeadingPositionGiven0_1And0_1And0_1And0_1AndNeg1_1Returns4() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.NEG_ONE});
-        int expected = 4;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLeadingPositionGiven0_1And0_1And0_1And0_1And0_1ReturnsNeg1() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO});
-        int expected = -1;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLeadingPositionGivenEmptyReturnsNeg1() {
-        // given
-        Equation equation = new Equation(new Fraction[0]);
-        int expected = -1;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLeadingPositionGiven0_1ReturnsNeg1() {
-        // given
-        Equation equation = new Equation(new Fraction[]{Fraction.ZERO});
-        int expected = -1;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLeadingPositionGiven1_1Returns0() {
-        // given
-        Equation equation = new Equation(new Fraction[]{Fraction.ONE});
-        int expected = 0;
-
-        // when
-        int actual = equation.findLeadingPosition();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsLeadingOneGiven1_1And2_3AndNeg5_2And1_1ReturnsTrue() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ONE, new Fraction(2, 3), new Fraction(-5, 2), Fraction.ONE});
-        boolean expected = true;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsLeadingOneGiven0_1And2_3AndNeg5_2And1_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, new Fraction(2, 3), new Fraction(-5, 2), Fraction.ONE});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsLeadingOneGiven0_1And0_1AndNeg5_2And1_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, new Fraction(-5, 2), Fraction.ONE});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsLeadingOneGiven0_1And0_1And0_1And1_1ReturnsTrue() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE});
-        boolean expected = true;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsLeadingOneGiven0_1And0_1And0_1And0_1ReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[]{
-                Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO});
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldIsLeadingOneGivenEmptyReturnsFalse() {
-        // given
-        Equation equation = new Equation(new Fraction[0]);
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
+    static class IsLeadingOneArgumentsProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            new Fraction(2, 3), Fraction.ONE, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, new Fraction(4, 5), new Fraction(-8, 1)
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, new Fraction(-8, 1)
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                    })),
+                    Arguments.of(true, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ONE, Fraction.ZERO, new Fraction(9, 2), Fraction.NEG_ONE
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.NEG_ONE
+                    })),
+                    Arguments.of(false, new Equation(new Fraction[0])),
+                    Arguments.of(false, new Equation(new Fraction[]{Fraction.ZERO})),
+                    Arguments.of(false, new Equation(new Fraction[]{Fraction.NEG_ONE})),
+                    Arguments.of(true, new Equation(new Fraction[]{
+                            Fraction.ONE, new Fraction(2, 3), new Fraction(-5, 2), Fraction.ONE
+                    })),
+                    Arguments.of(true, new Equation(new Fraction[]{
+                            Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+                    }))
+            );
+        }
     }
 
     @Test (expected = NullPointerException.class)
     public void shouldIsLeadingOneGivenNullThrowsNPE() {
-        // given
-        Equation equation = new Equation(null);
-        boolean expected = false;
-
-        // when
-        boolean actual = equation.isLeadingOne();
-
-        // then
-        assertEquals(expected, actual);
+        assertFalse(new Equation(null).isLeadingOne());
     }
 }
