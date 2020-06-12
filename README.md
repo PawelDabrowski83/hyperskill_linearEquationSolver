@@ -1,12 +1,13 @@
 # hyperskill_linearEquationSolver
 
 Simple arithmetic practice, fun with GitHub branches.
+Solve linear equations with matrices.
 
 Stage2:
 * Fraction representation
 * Fraction multiplication
 * Fraction add
-* Fraction reduce and set minut to nominator (upper part)
+* Fraction reduce and set minus to nominator (upper part)
 
 Stage 3:
 * Equation representation
@@ -18,4 +19,5 @@ Stage 4:
 * Matrix representation
 * Matrix sort by Equation length
 * Reduce Equation to have only 1 with given length
+* Pass the solution
 

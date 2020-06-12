@@ -56,6 +56,13 @@ public class Fraction {
         return this;
     }
 
+    public Fraction findOpposite() {
+        if (Fraction.ZERO.equals(this)) {
+            return Fraction.ZERO;
+        }
+        return new Fraction(denominator, numerator).shape();
+    }
+
     public Fraction shape() {
         return this.reduceZeroNumerator().pushUpMinus().reduce();
     }
