@@ -3,6 +3,8 @@ package org.hyperskill.linearEquationSolver;
 public class Fraction {
 
     public static final Fraction ZERO = new Fraction(0, 1);
+    public static final Fraction ONE = new Fraction(1, 1);
+    public static final Fraction NEG_ONE = new Fraction(-1, 1);
 
     final int numerator;
     final int denominator;
