@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 
 @DisplayName("Should Equation work")
 public class EquationTest {
