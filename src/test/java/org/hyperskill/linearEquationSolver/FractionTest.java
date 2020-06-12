@@ -1,6 +1,5 @@
 package org.hyperskill.linearEquationSolver;
 
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,13 +16,12 @@ public class FractionTest {
 
     @DisplayName("Should Fraction reduce() returns lowest equivalent Fraction")
     @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
-    @ArgumentsSource(ReduceArgumentProvider.class)
+    @ArgumentsSource(ReduceArgumentsProvider.class)
     void reduce(Fraction expected, Fraction actual) {
         assertEquals(expected, actual.reduce());
     }
 
-    static class ReduceArgumentProvider implements ArgumentsProvider {
-
+    static class ReduceArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
             return Stream.of(
@@ -39,13 +37,12 @@ public class FractionTest {
 
     @DisplayName("Should Fraction pushUpMinus() assure that minus is only on upper part")
     @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
-    @ArgumentsSource(PushUpMinusArgumentProvider.class)
+    @ArgumentsSource(PushUpMinusArgumentsProvider.class)
     void pushUpMinus(Fraction expected, Fraction actual) {
         assertEquals(expected, actual.pushUpMinus());
     }
 
-    static class PushUpMinusArgumentProvider implements ArgumentsProvider {
-
+    static class PushUpMinusArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
             return Stream.of(
@@ -60,13 +57,12 @@ public class FractionTest {
 
     @DisplayName("Should Fraction reduceZeroNumerator() assure that all zero fractions are Fraction.ZERO")
     @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
-    @ArgumentsSource(ReduceZeroNumeratorArgumentProvider.class)
+    @ArgumentsSource(ReduceZeroNumeratorArgumentsProvider.class)
     void reduceZeroNumerator(Fraction expected, Fraction actual) {
         assertEquals(expected, actual.reduceZeroNumerator());
     }
 
-    static class ReduceZeroNumeratorArgumentProvider implements ArgumentsProvider {
-
+    static class ReduceZeroNumeratorArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
             return Stream.of(
