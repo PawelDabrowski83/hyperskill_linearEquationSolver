@@ -57,8 +57,8 @@ public class Fraction {
     }
 
     public Fraction findOpposite() {
-        if (Fraction.ZERO.equals(this)) {
-            return Fraction.ZERO;
+        if (Fraction.ZERO.equals(this) || Fraction.ONE.equals(this) || Fraction.NEG_ONE.equals(this)) {
+            return this;
         }
         return new Fraction(denominator, numerator).shape();
     }

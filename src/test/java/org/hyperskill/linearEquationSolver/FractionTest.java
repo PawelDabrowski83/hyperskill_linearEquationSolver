@@ -74,4 +74,27 @@ public class FractionTest {
             );
         }
     }
+
+    @DisplayName("Should Fraction findOpposite() return valid fraction")
+    @ParameterizedTest(name = "{index} => expected={0}, actual={1}")
+    @ArgumentsSource(FindOppositeArgumentsProvider.class)
+    void findOpposite(Fraction expected, Fraction actual) {
+        assertEquals(expected, actual.findOpposite());
+    }
+
+    static class FindOppositeArgumentsProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+            return Stream.of(
+                    Arguments.of(Fraction.ZERO, Fraction.ZERO),
+                    Arguments.of(Fraction.ONE, Fraction.ONE),
+                    Arguments.of(Fraction.NEG_ONE, Fraction.NEG_ONE),
+                    Arguments.of(new Fraction(2, 3), new Fraction(3, 2)),
+                    Arguments.of(Fraction.ZERO, new Fraction(-8, 0)),
+                    Arguments.of(Fraction.ZERO, new Fraction(0, -8)),
+                    Arguments.of(new Fraction(-1, 2), new Fraction(-2, 1)),
+                    Arguments.of(new Fraction(-5, 1), new Fraction(-2, 10))
+            );
+        }
+    }
 }
