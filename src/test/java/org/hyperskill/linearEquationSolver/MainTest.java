@@ -33,7 +33,7 @@ public class MainTest {
 
     @Test
     public void shouldSolveTwoSimultaneousLinearsWork2() {
-        String expected = "-1,0 2,0";
+        String expected = "-1,00000 2,00000";
         double[] actualResult = Main.solveTwoSimultaneousLinears(1, 2, 3, 4, 5, 6);
         String actual = String.format("%.5f %.5f", actualResult[0], actualResult[1]);
         assertEquals(expected, actual);

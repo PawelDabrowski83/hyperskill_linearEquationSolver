@@ -3,6 +3,8 @@ package org.hyperskill.linearEquationSolver;
 public class Fraction {
 
     public static final Fraction ZERO = new Fraction(0, 1);
+    public static final Fraction ONE = new Fraction(1, 1);
+    public static final Fraction NEG_ONE = new Fraction(-1, 1);
 
     final int numerator;
     final int denominator;
@@ -52,6 +54,13 @@ public class Fraction {
             return Fraction.ZERO;
         }
         return this;
+    }
+
+    public Fraction findOpposite() {
+        if (Fraction.ZERO.equals(this)) {
+            return Fraction.ZERO;
+        }
+        return new Fraction(denominator, numerator).shape();
     }
 
     public Fraction shape() {
