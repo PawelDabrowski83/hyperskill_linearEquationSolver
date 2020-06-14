@@ -1,6 +1,8 @@
 package org.hyperskill.linearEquationSolver;
 
-public class Fraction {
+import java.util.Comparator;
+
+public class Fraction implements Comparator<Fraction> {
 
     public static final Fraction ZERO = new Fraction(0, 1);
     public static final Fraction ONE = new Fraction(1, 1);
@@ -65,5 +67,12 @@ public class Fraction {
 
     public Fraction shape() {
         return this.reduceZeroNumerator().pushUpMinus().reduce();
+    }
+
+    @Override
+    public int compare(Fraction fraction, Fraction t1) {
+        double fractionValue = (double) fraction.numerator / fraction.denominator;
+        double fractionComparedValue = (double) t1.numerator / t1.denominator;
+        return (int) (fractionValue - fractionComparedValue);
     }
 }
