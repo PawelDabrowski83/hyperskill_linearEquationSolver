@@ -20,8 +20,7 @@ public class MatrixUtilsTest {
     void sortByEquationLength(Matrix expected, Matrix matrix) {
         assertEquals(expected, MatrixUtils.sortByEquationLength(matrix));
     }
-    Equation equation;
-    private Stream<Arguments> sortByEquationLengthArgumentsProvider() {
+    private static Stream<Arguments> sortByEquationLengthArgumentsProvider() {
         return Stream.of(
                 Arguments.of(
                         new Matrix(
@@ -96,7 +95,7 @@ public class MatrixUtilsTest {
                                         })
                                 ))
                         )
-                )
+                ),
                 Arguments.of(
                         new Matrix(
                                 new ArrayList<Equation>(List.of(
