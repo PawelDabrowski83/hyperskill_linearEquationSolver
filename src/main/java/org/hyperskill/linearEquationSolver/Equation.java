@@ -59,4 +59,5 @@ public class Equation {
     public boolean isLeadingOne() {
         return Fraction.ONE.equals(findLeadingEntry());
     }
+
 }
