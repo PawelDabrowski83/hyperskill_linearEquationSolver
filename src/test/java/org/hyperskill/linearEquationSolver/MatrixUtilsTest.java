@@ -96,7 +96,7 @@ public class MatrixUtilsTest {
                                         })
                                 ))
                         )
-                )
+                ),
                 Arguments.of(
                         new Matrix(
                                 new ArrayList<Equation>(List.of(
