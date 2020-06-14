@@ -12,6 +12,8 @@ import static org.junit.Assert.assertEquals;
 @DisplayName("Should EquationUtils - external methods for Equation class")
 public class EquationUtilsTest {
 
+    final EquationUtils equationUtils = new EquationUtils();
+
     @DisplayName("Should addEquation work")
     @ParameterizedTest(name = "{index} => expected={0}, equation1={1}, equation2={2}")
     @MethodSource("addEquationArgumentsProvider")
@@ -187,6 +189,71 @@ public class EquationUtilsTest {
                         }),
                         new Equation(new Fraction[]{
                                 Fraction.ONE, new Fraction(3, 4), new Fraction(-1, 7), Fraction.ZERO, new Fraction(5, 6)
+                        })
+                )
+        );
+    }
+
+    @DisplayName("Should EquationUtils compare() work")
+    @ParameterizedTest(name = "{index} => expected={0}, equation1={1}, equation2={2}")
+    @MethodSource("compareArgumentsProvider")
+    void compare(int expected, Equation equation1, Equation equation2) {
+        assertEquals(expected, equationUtils.compare(equation1, equation2));
+    }
+    private static Stream<Arguments> compareArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(
+                        0,
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        })
+                ),
+                Arguments.of(
+                        1,
+                        new Equation(new Fraction[]{
+                                Fraction.ONE, Fraction.NEG_ONE
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        })
+                ),
+                Arguments.of(
+                        1,
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE, Fraction.NEG_ONE
+                        })
+                ),
+                Arguments.of(
+                        0,
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        })
+                ),
+                Arguments.of(
+                        1,
+                        new Equation(new Fraction[]{
+                                new Fraction(1, 3), new Fraction(2, 3), new Fraction(-1, 5)
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE
+                        })
+                ),
+                Arguments.of(
+                        8,
+                        new Equation(new Fraction[]{
+                                new Fraction(1, 3), new Fraction(2, 3), new Fraction(-1, 5)
+                        }),
+                        new Equation(new Fraction[]{
+                                new Fraction(1, 3), new Fraction(-20, 3), new Fraction(-1, 5)
                         })
                 )
         );
