@@ -99,11 +99,11 @@ public class FractionTest {
         }
     }
 
-    @DisplayName("Should compare() work")
+    @DisplayName("Should compareTo() work")
     @ParameterizedTest(name = "{index} => expected={0}, fraction1={1}, fraction2={2}")
     @MethodSource("compareArgumentsProvider")
     void compare(int expected, Fraction fraction1, Fraction fraction2) {
-
+        assertEquals(expected, fraction1.compareTo(fraction2));
     }
     private static Stream<Arguments> compareArgumentsProvider() {
         return Stream.of(
@@ -115,4 +115,6 @@ public class FractionTest {
                 Arguments.of(1, new Fraction(1, 13), new Fraction(1, 25))
         );
     }
+
+
 }
