@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
@@ -96,5 +97,22 @@ public class FractionTest {
                     Arguments.of(new Fraction(-5, 1), new Fraction(-2, 10))
             );
         }
+    }
+
+    @DisplayName("Should compare() work")
+    @ParameterizedTest(name = "{index} => expected={0}, fraction1={1}, fraction2={2}")
+    @MethodSource("compareArgumentsProvider")
+    void compare(int expected, Fraction fraction1, Fraction fraction2) {
+
+    }
+    private static Stream<Arguments> compareArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(0, Fraction.ONE, Fraction.ONE),
+                Arguments.of(2, Fraction.ONE, Fraction.NEG_ONE),
+                Arguments.of(-1, Fraction.ZERO, Fraction.ONE),
+                Arguments.of(1, new Fraction(1, 2), new Fraction(1, 4)),
+                Arguments.of(-1, new Fraction(1, 4), new Fraction(3, 4)),
+                Arguments.of(1, new Fraction(1, 13), new Fraction(1, 25))
+        );
     }
 }
