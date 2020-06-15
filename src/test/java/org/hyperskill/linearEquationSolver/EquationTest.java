@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
@@ -162,5 +163,61 @@ public class EquationTest {
     @Test (expected = NullPointerException.class)
     public void shouldIsLeadingOneGivenNullThrowsNPE() {
         assertFalse(new Equation(null).isLeadingOne());
+    }
+
+    @DisplayName("Should reduceEquivalentRows work")
+    @ParameterizedTest(name = "{index} => expected={0}, equation1={1}, equation2={2}")
+    @MethodSource("reduceEquivalentRowsArgumentsProvider")
+    void reduceEquivalentRowsArgumentsProvider(Equation expected, Equation equation1, Equation equation2) {
+        assertEquals(expected, equation1.reduceEquivalentRows(equation2));
+    }
+    private static Stream<Arguments> reduceEquivalentRowsArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.ONE, Fraction.ZERO, Fraction.ZERO
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ONE, Fraction.ONE, Fraction.ONE, Fraction.ONE
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.ONE, Fraction.ZERO, Fraction.ONE, Fraction.ONE
+                        })
+                ),
+                Arguments.of(
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, Fraction.NEG_ONE, new Fraction(-2, 1), new Fraction(-3, 1)
+                        }),
+                        new Equation(new Fraction[]{
+                                new Fraction(2, 1), new Fraction(3, 1), new Fraction(4, 1), new Fraction(5, 1)
+                        }),
+                        new Equation(new Fraction[]{
+                                new Fraction(2, 1), new Fraction(4, 1), new Fraction(6, 1), new Fraction(8, 1)
+                        })
+                ),
+                Arguments.of(
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, new Fraction(-2, 1), new Fraction(-4, 1), new Fraction(-6, 1)
+                        }),
+                        new Equation(new Fraction[]{
+                                new Fraction(3, 1), new Fraction(4, 1), new Fraction(5, 1), new Fraction(6, 1)
+                        }),
+                        new Equation(new Fraction[]{
+                                new Fraction(3, 1), new Fraction(6, 1), new Fraction(9, 1), new Fraction(12, 1)
+                        })
+
+                ),
+                Arguments.of(
+                        new Equation(new Fraction[]{
+                                Fraction.ZERO, new Fraction(6, 1), Fraction.NEG_ONE, new Fraction(4, 1)
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.NEG_ONE, new Fraction(3, 1), Fraction.ONE, new Fraction(6, 1)
+                        }),
+                        new Equation(new Fraction[]{
+                                Fraction.NEG_ONE, new Fraction(-3, 1), new Fraction(2, 1), new Fraction(2, 1)
+                        })
+                )
+        );
     }
 }
