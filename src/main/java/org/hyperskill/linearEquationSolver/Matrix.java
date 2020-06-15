@@ -44,4 +44,8 @@ public class Matrix {
         }
         return temp;
     }
+
+    public Matrix makeRowEchelon() {
+        return this;
+    }
 }
