@@ -95,7 +95,7 @@ public class MatrixTest {
                                         Fraction.ZERO, Fraction.ONE, Fraction.NEG_ONE, new Fraction(5, 1)
                                 }),
                                 new Equation(new Fraction[]{
-                                        Fraction.ZERO, Fraction.ZERO, new Fraction(2, 1), new Fraction(-2, 1)
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ONE, Fraction.NEG_ONE
                                 })
                         )),
                         new Matrix(List.of(
@@ -116,7 +116,7 @@ public class MatrixTest {
                                         Fraction.ONE, Fraction.ZERO, new Fraction(-1, 3), new Fraction(2, 3)
                                 }),
                                 new Equation(new Fraction[]{
-                                        Fraction.ZERO, Fraction.ONE, new Fraction(13, 12), new Fraction(1, 12)
+                                        Fraction.ZERO, Fraction.ONE, new Fraction(1, 9), new Fraction(4, 27)
                                 }),
                                 new Equation(new Fraction[]{
                                         Fraction.ZERO, Fraction.ZERO, Fraction.ONE, new Fraction(-1, 15)
@@ -140,7 +140,7 @@ public class MatrixTest {
                                         Fraction.ONE, Fraction.ONE, Fraction.ONE, Fraction.ZERO
                                 }),
                                 new Equation(new Fraction[]{
-                                        Fraction.ZERO, Fraction.ONE, Fraction.ONE, Fraction.ONE
+                                        Fraction.ZERO, Fraction.ONE, Fraction.ONE, Fraction.ZERO
                                 }),
                                 new Equation(new Fraction[]{
                                         Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE
@@ -209,7 +209,7 @@ public class MatrixTest {
                 Arguments.of(
                         new Matrix(List.of(
                                 new Equation(new Fraction[]{
-                                        Fraction.ONE, new Fraction(2, 1), new Fraction(3, 1), new Fraction(4, 1)
+                                        Fraction.ONE, new Fraction(4, 3), new Fraction(5, 3), new Fraction(2, 1)
                                 }),
                                 new Equation(new Fraction[]{
                                         Fraction.ZERO, Fraction.ONE, new Fraction(2, 1), new Fraction(3, 1)

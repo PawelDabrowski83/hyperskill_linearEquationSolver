@@ -47,25 +47,26 @@ public class Matrix {
     }
 
     public Matrix makeRowEchelon() {
-        boolean isSolved = false;
         Matrix matrix = new Matrix(this.equations);
-        while(!isSolved) {
-            matrix = MatrixUtils.sortByEquationLength(matrix.makeEquationsLeadingOne());
-            int counter = 0;
-            int position = 0;
+        matrix = MatrixUtils.sortByEquationLength(matrix.makeEquationsLeadingOne());
+        int position = 0;
             for (int i = 1; i < matrix.equations.size(); i++) {
-                if (position < matrix.equations.get(i).findLeadingPosition()) {
+                if (position < matrix.equations.get(i).findLeadingPosition() && matrix.equations.get(i).findLeadingPosition() != -1) {
                     position = matrix.equations.get(i).findLeadingPosition();
+                    continue;
+                } else if (matrix.equations.get(i).findLeadingPosition() == -1) {
+                    return matrix;
                 } else {
                     Equation base = matrix.equations.get(i - 1);
                     Equation target = matrix.equations.get(i);
-                    matrix.equations.add(i, EquationUtils.addEquation(target, EquationUtils.multiplyEquation(base, Fraction.NEG_ONE)));
-                    matrix.equations.remove(i + 1);
-                    i = 1;
+                    base = base.reduceEquivalentRows(target);
+                    matrix.equations.add(i - 1, base);
+                    matrix.equations.remove(i);
+                    matrix = MatrixUtils.sortByEquationLength(matrix.makeEquationsLeadingOne());
+                    i = 0;
+                    position = 0;
                 }
             }
-            isSolved = true;
-        }
-        return this;
+        return matrix;
     }
 }
