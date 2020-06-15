@@ -1,6 +1,7 @@
 package org.hyperskill.linearEquationSolver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Matrix {
@@ -46,6 +47,25 @@ public class Matrix {
     }
 
     public Matrix makeRowEchelon() {
+        boolean isSolved = false;
+        Matrix matrix = new Matrix(this.equations);
+        while(!isSolved) {
+            matrix = MatrixUtils.sortByEquationLength(matrix.makeEquationsLeadingOne());
+            int counter = 0;
+            int position = 0;
+            for (int i = 1; i < matrix.equations.size(); i++) {
+                if (position < matrix.equations.get(i).findLeadingPosition()) {
+                    position = matrix.equations.get(i).findLeadingPosition();
+                } else {
+                    Equation base = matrix.equations.get(i - 1);
+                    Equation target = matrix.equations.get(i);
+                    matrix.equations.add(i, EquationUtils.addEquation(target, EquationUtils.multiplyEquation(base, Fraction.NEG_ONE)));
+                    matrix.equations.remove(i + 1);
+                    i = 1;
+                }
+            }
+            isSolved = true;
+        }
         return this;
     }
 }
