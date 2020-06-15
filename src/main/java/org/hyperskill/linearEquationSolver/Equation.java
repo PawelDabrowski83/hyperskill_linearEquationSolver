@@ -60,4 +60,11 @@ public class Equation {
         return Fraction.ONE.equals(findLeadingEntry());
     }
 
+    public Equation reduceEquivalentRows(Equation equation) {
+        if (equation.numbers != null && this.numbers != null) {
+            return EquationUtils.addEquation(this, EquationUtils.multiplyEquation(equation, Fraction.NEG_ONE));
+        }
+        return this;
+    }
+
 }
