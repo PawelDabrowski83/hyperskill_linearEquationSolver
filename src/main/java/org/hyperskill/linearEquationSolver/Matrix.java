@@ -1,5 +1,6 @@
 package org.hyperskill.linearEquationSolver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Matrix {
@@ -30,5 +31,17 @@ public class Matrix {
         return "Matrix{" +
                 "equations=" + equations +
                 '}';
+    }
+
+    public Matrix makeEquationsLeadingOne() {
+        Matrix temp = new Matrix(new ArrayList<>());
+        if (this.equations != null) {
+            int counter = 0;
+            while (counter < this.equations.size()) {
+                temp.equations.add(EquationUtils.makeLeadingOne(this.equations.get(counter)));
+                counter++;
+            }
+        }
+        return temp;
     }
 }

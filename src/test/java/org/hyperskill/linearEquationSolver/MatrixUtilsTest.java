@@ -32,13 +32,13 @@ public class MatrixUtilsTest {
                                                 Fraction.ZERO, Fraction.ONE, new Fraction(2, 3), new Fraction(-9, 1)
                                         }),
                                         new Equation(new Fraction[]{
-                                                Fraction.ZERO, Fraction.ZERO, Fraction.NEG_ONE, Fraction.ONE
-                                        }),
-                                        new Equation(new Fraction[]{
                                                 Fraction.ZERO, Fraction.ZERO, Fraction.ONE, Fraction.ONE
                                         }),
                                         new Equation(new Fraction[]{
                                                 Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                                        }),
+                                        new Equation(new Fraction[]{
+                                                Fraction.ZERO, Fraction.ZERO, Fraction.NEG_ONE, Fraction.ONE
                                         })
                                 ))
                         ),
@@ -132,4 +132,6 @@ public class MatrixUtilsTest {
                 )
         );
     }
+
+
 }
