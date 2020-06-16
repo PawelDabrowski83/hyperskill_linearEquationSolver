@@ -1,7 +1,6 @@
 package org.hyperskill.linearEquationSolver;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MatrixUtils {
 
@@ -24,5 +23,25 @@ public class MatrixUtils {
             }
         }
         return matrix;
+    }
+
+    public static int[][] convertInputToIntArray(String input) {
+        if (input == null || input.isEmpty()) {
+            return new int[0][0];
+        }
+        String[] rows = input.split("\\n+");
+        int[][] result = new int[rows.length][rows[0].split("\\s+").length];
+        int rowCounter = 0;
+        for (String row : rows) {
+            int counter = 0;
+            String[] numbersAsString = rows[rowCounter].split("\\s+");
+            for (String str : numbersAsString) {
+                result[rowCounter][counter] = Integer.parseInt(str);
+                counter++;
+            }
+            rowCounter++;
+        }
+
+        return result;
     }
 }

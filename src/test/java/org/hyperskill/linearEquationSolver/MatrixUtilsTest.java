@@ -222,5 +222,84 @@ public class MatrixUtilsTest {
         );
     }
 
+    @DisplayName("Should convertInputToIntArray work")
+    @ParameterizedTest(name = "{index} => expected={0}, string={1}")
+    @MethodSource("convertInputToIntArrayArgumentsProvider")
+    void convertInputToIntArray(int[][] expected, String provided) {
+        assertArrayEquals(expected, MatrixUtils.convertInputToIntArray(provided));
+    }
+    private static Stream<Arguments> convertInputToIntArrayArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(
+                        new int[][]{
+                                new int[]{
+                                        1, 2, 3
+                                },
+                                new int[]{
+                                        0, 1, 2
+                                },
+                                new int[]{
+                                        0, 0, 1
+                                }
+                        },
+                        "1 2 3" + System.lineSeparator() +
+                        "0 1 2" + System.lineSeparator() +
+                        "0 0 1"
+                ),
+                Arguments.of(
+                        new int[][]{
+                                new int[]{
+                                        1, 0, -1
+                                },
+                                new int[]{
+                                        0, 1, 2
+                                },
+                                new int[]{
+                                        0, 0, 0
+                                }
+                        },
+                        "1 0 -1" + System.lineSeparator() +
+                        "0 1 2" + System.lineSeparator() +
+                        "0 0 0"
+                ),
+                Arguments.of(
+                        new int[][]{
+                                new int[]{
+                                        -1, 0, 1
+                                },
+                                new int[]{
+                                        -2, 17, 555
+                                }
+                        },
+                        "-1 0 1" + System.lineSeparator() +
+                        "-2 17 555"
+                ),
+                Arguments.of(
+                        new int[][]{
+                                new int[]{
+                                        1, 3, 0, 2, 7, -2
+                                },
+                                new int[]{
+                                        0, 1, 5, -1, 0, 0
+                                },
+                                new int[]{
+                                        0, 0, 0, 1, 11, 2
+                                },
+                                new int[]{
+                                        -15, 0, 9, -2, 3, 0
+                                },
+                                new int[]{
+                                        1, 2, 3, 0, 1, 2
+                                }
+                        },
+                        "1 3 0 2 7 -2" + System.lineSeparator() +
+                        "0 1 5 -1 0 0" + System.lineSeparator() +
+                        "0 0 0 1 11 2" + System.lineSeparator() +
+                        "-15 0 9 -2 3 0" + System.lineSeparator() +
+                        "1 2 3 0 1 2"
+                )
+        );
+    }
+
 
 }

@@ -1,7 +1,5 @@
 package org.hyperskill.linearEquationSolver;
 
-import java.util.Comparator;
-
 public class FractionUtils {
 
     public static int findGCD(int a, int b) {
