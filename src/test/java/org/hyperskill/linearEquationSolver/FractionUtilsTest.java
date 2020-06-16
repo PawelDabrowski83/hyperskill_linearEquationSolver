@@ -97,5 +97,21 @@ public class FractionUtilsTest {
         assertNull(FractionUtils.multiplyFractions(null, Fraction.ONE));
     }
 
+    @DisplayName("Should convertIntToFraction work")
+    @ParameterizedTest(name = "{index} => expected={0}, number={1}")
+    @MethodSource("convertIntToFractionArgumentsProvider")
+    void convertIntToFraction(Fraction expected, int number) {
+        assertEquals(expected, FractionUtils.convertIntToFraction(number));
+    }
+    private static Stream<Arguments> convertIntToFractionArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(Fraction.ZERO, 0),
+                Arguments.of(Fraction.ONE, 1),
+                Arguments.of(Fraction.NEG_ONE, -1),
+                Arguments.of(new Fraction(13, 1), 13),
+                Arguments.of(new Fraction(-99, 1), -99)
+        );
+    }
+
 
 }

@@ -53,4 +53,8 @@ public class FractionUtils {
                 .shape();
     }
 
+    public static Fraction convertIntToFraction(int number) {
+        return new Fraction(number, 1).shape();
+    }
+
 }
