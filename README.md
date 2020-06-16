@@ -19,5 +19,6 @@ Stage 4:
 * Matrix representation
 * Matrix sort by Equation length
 * Reduce Equation to have only 1 with given length
+* Read Matrix from file
 * Pass the solution
 
