@@ -70,6 +70,27 @@ public class Matrix {
     }
 
     public Matrix makeReducedEchelonForm() {
-        return this;
+        Matrix temp = new Matrix(new ArrayList<>(this.equations));
+        if (this.equations != null && temp.equations.size() > 1) {
+            for (int i = 1; i < temp.equations.size(); i++) {
+                int leadingPosition = temp.equations.get(i).findLeadingPosition();
+                if (leadingPosition != -1) {
+                    for (int j = 0; j < temp.equations.size(); j++) {
+                        if (j != i && temp.equations.get(j).getLength() >= leadingPosition) {
+                            Fraction toReduce = temp.equations.get(j).numbers[leadingPosition];
+                            toReduce = FractionUtils.multiplyFractions(toReduce, Fraction.NEG_ONE);
+                            if (!Fraction.ZERO.equals(toReduce)) {
+                                Equation reductor = EquationUtils.multiplyEquation(temp.equations.get(i), toReduce);
+                                Equation reduced = EquationUtils.addEquation(temp.equations.get(j), reductor);
+                                temp.equations.add(j, reduced);
+                                temp.equations.remove(j + 1);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        return temp;
     }
 }
