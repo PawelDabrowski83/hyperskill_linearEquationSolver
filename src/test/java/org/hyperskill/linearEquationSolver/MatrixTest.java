@@ -232,4 +232,93 @@ public class MatrixTest {
                 )
         );
     }
+
+    @DisplayName("Should makeReducedEchelonForm")
+    @ParameterizedTest(name = "{index} => expected={0}, matrix={1}")
+    @MethodSource("makeReducedEchelonFormArgumentsProvider")
+    void makeReducedEchelonForm(Matrix expected, Matrix matrix) {
+        assertEquals(expected, matrix.makeReducedEchelonForm());
+    }
+    private static Stream<Arguments> makeReducedEchelonFormArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(
+                        new Matrix(List.of(
+                                new Equation(new Fraction[]{
+                                        Fraction.ONE, Fraction.ZERO, Fraction.ZERO
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ONE, Fraction.ZERO
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+                                })
+                        )),
+                        new Matrix(List.of(
+                                new Equation(new Fraction[]{
+                                        Fraction.ONE, new Fraction(2, 1), new Fraction(3, 1)
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ONE, new Fraction(2, 1)
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                                })
+                        ))
+                ),
+                Arguments.of(
+                        new Matrix(List.of(
+                                new Equation(new Fraction[]{
+                                        Fraction.ONE, Fraction.ZERO, new Fraction(-15, 1), Fraction.ZERO, new Fraction(9, 1)
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ONE, new Fraction(5, 1), Fraction.ZERO, new Fraction(-2, 1)
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE, new Fraction(2, 1)
+                                })
+                        )),
+                        new Matrix(List.of(
+                                new Equation(new Fraction[]{
+                                        Fraction.ONE, new Fraction(3, 1), Fraction.ZERO, new Fraction(2, 1), new Fraction(7, 1)
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ONE, new Fraction(5, 1), Fraction.ONE, Fraction.ZERO
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE, new Fraction(2, 1)
+                                })
+                        ))
+                ),
+                Arguments.of(
+                        new Matrix(List.of(
+                                new Equation(new Fraction[]{
+                                        Fraction.ONE, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ONE, Fraction.ZERO, Fraction.ZERO
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ONE, Fraction.ZERO
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+                                })
+                        )),
+                        new Matrix(List.of(
+                                new Equation(new Fraction[]{
+                                        Fraction.ONE, new Fraction(2, 1), Fraction.ZERO, Fraction.ONE
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ONE, new Fraction(2, 1), new Fraction(2, 1)
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ONE, Fraction.ONE
+                                }),
+                                new Equation(new Fraction[]{
+                                        Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+                                })
+                        ))
+                )
+        );
+    }
 }

@@ -53,7 +53,6 @@ public class Matrix {
             for (int i = 1; i < matrix.equations.size(); i++) {
                 if (position < matrix.equations.get(i).findLeadingPosition() && matrix.equations.get(i).findLeadingPosition() != -1) {
                     position = matrix.equations.get(i).findLeadingPosition();
-                    continue;
                 } else if (matrix.equations.get(i).findLeadingPosition() == -1) {
                     return matrix;
                 } else {
@@ -68,5 +67,9 @@ public class Matrix {
                 }
             }
         return matrix;
+    }
+
+    public Matrix makeReducedEchelonForm() {
+        return this;
     }
 }
