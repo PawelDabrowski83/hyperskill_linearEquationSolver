@@ -259,5 +259,40 @@ public class EquationUtilsTest {
         );
     }
 
+    @DisplayName("Should readSolution() from Equation work")
+    @ParameterizedTest(name = "{index} => expected={0}, equation={1}")
+    @MethodSource("readSolutionArgumentsProvider")
+    void readSolution(double expected, Equation given) {
+        assertEquals(expected, EquationUtils.readSolution(given), 0.1);
+    }
+    private static Stream<Arguments> readSolutionArgumentsProvider() {
+        return Stream.of(
+//                Arguments.of(1.0, new Equation(new Fraction[]{
+//                        Fraction.ONE, Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+//                })),
+//                Arguments.of(-1.0, new Equation(new Fraction[]{
+//                        Fraction.ZERO, Fraction.ONE, Fraction.ZERO, Fraction.ZERO, Fraction.NEG_ONE
+//                })),
+//                Arguments.of(0, new Equation(new Fraction[]{
+//                        Fraction.ZERO, new Fraction(2, 1), Fraction.ZERO, Fraction.ONE
+//                })),
+//                Arguments.of(1.0, new Equation(new Fraction[]{
+//                        Fraction.ZERO, Fraction.ONE, Fraction.ONE
+//                })),
+//                Arguments.of(-1.0, new Equation(new Fraction[]{
+//                        Fraction.ZERO, Fraction.ONE, Fraction.NEG_ONE
+//                })),
+//                Arguments.of(0, new Equation(new Fraction[]{
+//                        Fraction.NEG_ONE, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ONE
+//                })),
+//                Arguments.of(9.0, new Equation(new Fraction[]{
+//                        Fraction.ZERO, Fraction.ONE, Fraction.ZERO, Fraction.ZERO, new Fraction(9, 1)
+//                })),
+                Arguments.of(0, new Equation(new Fraction[]{
+                        Fraction.ZERO, Fraction.ONE, Fraction.ZERO, Fraction.ONE, new Fraction(9, 1)
+                }))
+        );
+    }
+
 
 }

@@ -66,4 +66,23 @@ public class EquationUtils implements Comparator<Equation> {
         }
         return fractions1;
     }
+
+    public static double readSolution(Equation equation) {
+        if (Fraction.ONE.equals(equation.findLeadingEntry())) {
+            int leadingPosition = equation.findLeadingPosition();
+            if (leadingPosition == -1 || leadingPosition == equation.getLength()) {
+                return 0;
+            }
+            int counter = 1;
+            Fraction current = equation.numbers[leadingPosition + counter];
+            while (Fraction.ZERO.equals(current) && leadingPosition + counter < equation.getLength() - 1) {
+                counter++;
+                current = equation.numbers[leadingPosition + counter];
+            }
+            if (leadingPosition + counter == equation.getLength() - 1) {
+                return equation.numbers[equation.numbers.length - 1].getDecimal();
+            }
+        }
+        return 0;
+    }
 }
