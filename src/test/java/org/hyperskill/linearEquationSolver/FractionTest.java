@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 @DisplayName("Should Fraction methods work")
 public class FractionTest {
@@ -31,9 +32,43 @@ public class FractionTest {
                     Arguments.of(new Fraction(5, 1), new Fraction(100, 20)),
                     Arguments.of(new Fraction(1, 2), new Fraction(13, 26)),
                     Arguments.of(new Fraction(3, 4), new Fraction(3, 4)),
-                    Arguments.of(new Fraction(3, 4), new Fraction(6, 8))
+                    Arguments.of(new Fraction(3, 4), new Fraction(6, 8)),
+                    Arguments.of(Fraction.ZERO, new Fraction(0, 1)),
+                    Arguments.of(Fraction.ONE, new Fraction(1, 1)),
+                    Arguments.of(Fraction.NEG_ONE, new Fraction(-1, 1))
+
                     );
         }
+    }
+
+    @DisplayName("Should Fraction reduce() returns same objects")
+    @ParameterizedTest(name = "{index} => expected={0}, actual{1}")
+    @MethodSource("reduceSameArgumentsProvider")
+    void reduceSame(Fraction expected, Fraction actual) {
+        assertSame(expected, actual.reduce());
+    }
+    private static Stream<Arguments> reduceSameArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(Fraction.ZERO, new Fraction(0, 1)),
+                Arguments.of(Fraction.ONE, new Fraction(1, 1)),
+                Arguments.of(Fraction.NEG_ONE, new Fraction(-1, 1))
+        );
+    }
+
+    @DisplayName("Should roundUp() work")
+    @ParameterizedTest(name = "{index} => expected={0}, source={1}")
+    @MethodSource("roundUpArgumentsProvider")
+    void roundUp(Fraction expected, Fraction source) {
+        assertEquals(expected, source.roundUp());
+    }
+    private static Stream<Arguments> roundUpArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(new Fraction(1, 418), new Fraction(2_357_101, 836_541_279)),
+                Arguments.of(new Fraction(1_001, 90_000), new Fraction(1_001_001, 90_000_000)),
+                Arguments.of(new Fraction(1, 89_234), new Fraction(1, 89_234_290)),
+                Arguments.of(new Fraction(928, 1), new Fraction(928_132, 803)),
+                Arguments.of(new Fraction(928, 1), new Fraction(928_132, 3))
+        );
     }
 
     @DisplayName("Should Fraction pushUpMinus() assure that minus is only on upper part")
