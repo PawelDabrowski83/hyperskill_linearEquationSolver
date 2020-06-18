@@ -6,10 +6,10 @@ public class Fraction implements Comparable<Fraction>{
     public static final Fraction ONE = new Fraction(1, 1);
     public static final Fraction NEG_ONE = new Fraction(-1, 1);
 
-    final int numerator;
-    final int denominator;
+    final long numerator;
+    final long denominator;
 
-    public Fraction(int numerator, int denominator) {
+    public Fraction(long numerator, long denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -27,8 +27,8 @@ public class Fraction implements Comparable<Fraction>{
 
     @Override
     public int hashCode() {
-        int result = numerator;
-        result = 31 * result + denominator;
+        int result = (int) (numerator ^ (numerator >>> 32));
+        result = 31 * result + (int) (denominator ^ (denominator >>> 32));
         return result;
     }
 
@@ -38,9 +38,9 @@ public class Fraction implements Comparable<Fraction>{
     }
 
     public Fraction reduce() {
-        int gcd = FractionUtils.findGCD(numerator, denominator);
-        int reducedNumerator = numerator / gcd;
-        int reducedDenominator = denominator / gcd;
+        long gcd = FractionUtils.findGCD(numerator, denominator);
+        long reducedNumerator = numerator / gcd;
+        long reducedDenominator = denominator / gcd;
 
         return reducedDenominator == 1 && reducedNumerator == 1 ? Fraction.ONE :
                 reducedDenominator == 1 && reducedNumerator == 0 ? Fraction.ZERO :
@@ -63,8 +63,8 @@ public class Fraction implements Comparable<Fraction>{
     }
 
     public Fraction roundUp() {
-        int reducedNumerator = numerator;
-        int reducedDenominator = denominator;
+        long reducedNumerator = numerator;
+        long reducedDenominator = denominator;
         while (reducedDenominator > 100_000 || reducedNumerator > 100_000) {
             if (reducedNumerator > 1_000 && reducedDenominator > 1_000) {
                 reducedNumerator /= 1_000;
@@ -88,7 +88,7 @@ public class Fraction implements Comparable<Fraction>{
     }
 
     public Fraction shape() {
-        return this.reduceZeroNumerator().pushUpMinus().reduce();
+        return this.reduceZeroNumerator().pushUpMinus().roundUp().reduce();
     }
 
     public double getDecimal() {

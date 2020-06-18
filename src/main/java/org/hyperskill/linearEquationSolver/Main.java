@@ -14,6 +14,9 @@ public class Main {
     }
 
     public static String[] checkCommandLine(String[] args) {
+        if (args == null) {
+            return new String[]{"", ""};
+        }
         String filenameInput = "";
         String filenameOutput = "";
         String commandLine = String.join(" ", args);

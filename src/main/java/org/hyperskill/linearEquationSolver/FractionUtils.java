@@ -2,9 +2,9 @@ package org.hyperskill.linearEquationSolver;
 
 public class FractionUtils {
 
-    public static int findGCD(int a, int b) {
-        int num1 = Math.abs(a);
-        int num2 = Math.abs(b);
+    public static long findGCD(long a, long b) {
+        long num1 = Math.abs(a);
+        long num2 = Math.abs(b);
         if (num1 == 0 || num2 == 0) {
             return 1;
         }
@@ -27,7 +27,7 @@ public class FractionUtils {
                     fraction1.denominator).shape();
         }
         if (fraction1.denominator % fraction2.denominator == 0 || fraction2.denominator % fraction1.denominator == 0) {
-            int divider;
+            long divider;
             if (fraction1.denominator > fraction2.denominator) {
                 divider = fraction1.denominator / fraction2.denominator;
                 return new Fraction(fraction1.numerator + fraction2.numerator * divider,
