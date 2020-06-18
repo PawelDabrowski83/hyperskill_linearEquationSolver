@@ -39,7 +39,13 @@ public class Fraction implements Comparable<Fraction>{
 
     public Fraction reduce() {
         int gcd = FractionUtils.findGCD(numerator, denominator);
-        return new Fraction (numerator / gcd, denominator / gcd);
+        int reducedNumerator = numerator / gcd;
+        int reducedDenominator = denominator / gcd;
+
+        return reducedDenominator == 1 && reducedNumerator == 1 ? Fraction.ONE :
+                reducedDenominator == 1 && reducedNumerator == 0 ? Fraction.ZERO :
+                reducedDenominator == 1 && reducedNumerator == -1 ? Fraction.NEG_ONE :
+                new Fraction (reducedNumerator, reducedDenominator);
     }
 
     public Fraction pushUpMinus() {
@@ -54,6 +60,24 @@ public class Fraction implements Comparable<Fraction>{
             return Fraction.ZERO;
         }
         return this;
+    }
+
+    public Fraction roundUp() {
+        int reducedNumerator = numerator;
+        int reducedDenominator = denominator;
+        while (reducedDenominator > 100_000 || reducedNumerator > 100_000) {
+            if (reducedNumerator > 1_000 && reducedDenominator > 1_000) {
+                reducedNumerator /= 1_000;
+                reducedDenominator /= 1_000;
+            } else if (reducedNumerator > 1_000) {
+                reducedNumerator /= 1_000;
+                reducedDenominator = 1;
+            } else {
+                reducedDenominator /= 1_000;
+                reducedNumerator = 1;
+            }
+        }
+        return new Fraction(reducedNumerator, reducedDenominator).reduce();
     }
 
     public Fraction findOpposite() {
