@@ -1,42 +1,56 @@
 package org.hyperskill.linearEquationSolver;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class MainTest {
 
-    @Test
-    public void shouldSolveLinearWork() {
-        assertEquals(0.6, Main.solveLinear(5, 3), 0.1);
-        assertEquals(0.5, Main.solveLinear(8, 4), 0.1);
-        assertEquals(0, Main.solveLinear(22, 0), 0.1);
+    @DisplayName("Should checkCommandLine() work")
+    @ParameterizedTest(name = "{index} => expected={0}, input={1}")
+    @MethodSource("checkCommandLineArgumentsProvider")
+    void checkCommandLine(String[] expected, String[] input) {
+        assertArrayEquals(expected, Main.checkCommandLine(input));
+    }
+    private static Stream<Arguments> checkCommandLineArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(
+                        new String[]{"in.txt", "out.txt"},
+                        new String[]{"-in", "in.txt", "-out", "out.txt"}
+                ),
+                Arguments.of(
+                        new String[]{"input.txt", "output.txt"},
+                        new String[]{"-out", "output.txt", "-in", "input.txt"}
+                ),
+                Arguments.of(
+                        new String[]{"", ""},
+                        new String[]{"input.txt", "in", "out", "output.txt"}
+                ),
+                Arguments.of(
+                        new String[]{"", ""},
+                        new String[]{""}
+                ),
+                Arguments.of(
+                        new String[]{"", ""},
+                        new String[0]
+                )
+        );
     }
 
-    @Test (expected = ArithmeticException.class)
-    public void shouldGivenDividerZeroThrowArithmeticException() {
-        // when
-        double actual = Main.solveLinear(0, 17);
-        // then
-        // throws exception
+    @DisplayName("Should checkCommandLine() receive null, it returns array with empty strings")
+    @ParameterizedTest(name = "{index} => expected=null, actual={0}")
+    @NullAndEmptySource
+    void checkCommandLine(String[] text) {
+        assertArrayEquals(new String[]{"", ""}, Main.checkCommandLine(text));
     }
-
-    @Test
-    public void shouldSolveTwoSimultaneousLinearsWork1() {
-        String expected = "0,85714 0,71429";
-        double[] actualResult = Main.solveTwoSimultaneousLinears(4, 5 , 7, 3, 9, 9);
-        String actual = String.format("%.5f %.5f", actualResult[0], actualResult[1]);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSolveTwoSimultaneousLinearsWork2() {
-        String expected = "-1,00000 2,00000";
-        double[] actualResult = Main.solveTwoSimultaneousLinears(1, 2, 3, 4, 5, 6);
-        String actual = String.format("%.5f %.5f", actualResult[0], actualResult[1]);
-        assertEquals(expected, actual);
-    }
-
 }
